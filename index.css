@@ -1,3 +1,33 @@
-#heading {
- color: brown;
+#logoimg{
+    height: 120px;
+}
+.header{
+    display: flex;
+    justify-content: space-between;
+}
+#navItems{
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    gap: 10px 20px;
+}
+.nav-bar{
+    margin-left: 80px;
+}
+.res-card{
+    width: 200px;
+    height: 300px;
+    border: 1px solid black;
+}
+.res-card>img{
+    width: 160px;
+    height:100px;
+    padding: 10px;
+    object-fit: cover;
+}
+.res-container{
+    display: flex;
+    flex-direction: row;
+    gap: 40px;
 }
