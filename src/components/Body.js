@@ -1,12 +1,21 @@
 import RestCar from "./RestCard"
-import { restList } from "../utilities/MockData";
-import { useState } from "react";
-
+import { useEffect, useState } from "react";
+import {SWIGGY_API} from "../utilities/constants"
+import ShimmerCard from "./ShimmerCard"
 
 
 const Body =()=>{
-    let [listOfRest, setListOfRest] = useState(restList);
+    let [listOfRest, setListOfRest] = useState([]);
+    useEffect(()=>{getList();},[]);
+    const getList = async()=>{
+        let  response =await fetch(SWIGGY_API);
+        let restList = await response.json();
+        setListOfRest(restList.data.cards[5].card.card.gridElements.infoWithStyle.restaurants);
+    }
+    
     return (
+        (listOfRest.length===0)?
+        <ShimmerCard/>:
         <div className="body">
             <div className="search">
                 <button onClick={
@@ -29,7 +38,6 @@ const Body =()=>{
                 }
             </div>
         </div>
-        
     );
 }
 

@@ -17,7 +17,7 @@
 }
 .res-card{
     width: 200px;
-    height: 300px;
+    height: auto;
     border: 1px solid black;
 }
 .res-card>img{
@@ -30,4 +30,16 @@
     display: flex;
     flex-direction: row;
     gap: 40px;
+}
+
+.shimmer-Container{
+    display: flex;
+    flex-direction: row;
+    gap: 40px;
+}
+
+.shimmer{
+    width: 200px;
+    height: 300px;
+    background-color: gray;
 }
