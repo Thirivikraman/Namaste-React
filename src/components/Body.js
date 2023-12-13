@@ -5,29 +5,47 @@ import ShimmerCard from "./ShimmerCard"
 
 
 const Body =()=>{
-    let [listOfRest, setListOfRest] = useState([]);
-    useEffect(()=>{getList();},[]);
+    const [listOfRest, setListOfRest] = useState([]);
+    const [filterListOfRest, setFilterListOfRest] = useState([]);
+    const [searchValue,setSearchValue] = useState("");
     const getList = async()=>{
         let  response =await fetch(SWIGGY_API);
         let restList = await response.json();
-        setListOfRest(restList.data.cards[5].card.card.gridElements.infoWithStyle.restaurants);
+        return restList;
     }
+useEffect(()=>{
+        getList().then((restList)=>{
+                setListOfRest(restList.data.cards[5].card.card.gridElements.infoWithStyle.restaurants);
+                setFilterListOfRest(listOfRest);
+            });
+        ;},[]);
+    
     
     return (
         (listOfRest.length===0)?
         <ShimmerCard/>:
         <div className="body">
-            <div className="search">
+            <div className="Search">
+                <input name="Search" value={searchValue} onChange={(e)=>{
+                    console.log(e);
+                    setSearchValue(e.target.value);
+                }}></input>
+                <button onClick={()=>{
+                    let filtered = listOfRest.filter((res)=>res.info.name.toLowerCase().includes(searchValue.toLowerCase()));
+                    setFilterListOfRest(filtered);
+                }}>Search</button>
+            </div>
+            <div className="filter">
                 <button onClick={
                     function(){
-                        let newList = listOfRest.filter((res)=>res.info.avgRating>4.2);
+                        let newList = filterListOfRest.filter((res)=>res.info.avgRating>4.2);
                         setListOfRest(newList);
                     }
                 }>Top Restaurant</button>
             </div>
             <div className="res-container">
                {
-                listOfRest.map(function(restaurant){
+                filterListOfRest.map(function(restaurant){
                         return  <RestCar 
                         key={restaurant.info.id} 
                         rating={restaurant.info.avgRating} 
