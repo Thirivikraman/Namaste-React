@@ -2,26 +2,28 @@ import RestCar from "./RestCard"
 import { useEffect, useState } from "react";
 import {SWIGGY_API} from "../utilities/constants"
 import ShimmerCard from "./ShimmerCard"
-import {restList} from "../utilities/MockData"
+import { Link } from "react-router-dom";
+//import {restList} from "../utilities/MockData"
 
 const Body =()=>{
-    const [listOfRest, setListOfRest] = useState(restList);
+    const [listOfRest, setListOfRest] = useState([]);
+    //const [listOfRest, setListOfRest] = useState(restList);
     const [filterListOfRest, setFilterListOfRest] = useState(listOfRest);
     const [searchValue,setSearchValue] = useState("");
-    /*const getList = async()=>{
+    const getList = async()=>{
         let  response =await fetch(SWIGGY_API);
         let restList = await response.json();
         return restList;
     }
 useEffect(()=>{
         getList().then((rest)=>{
-                setListOfRest(restList);
-                setFilterListOfRest(listOfRest);
+                setListOfRest(rest.data.cards[2].card.card.gridElements.infoWithStyle.restaurants);
+                setFilterListOfRest(rest.data.cards[2].card.card.gridElements.infoWithStyle.restaurants);
             });
         ;},[]);
-    */
+    
     return (
-        (listOfRest.length===0)?
+        (listOfRest == null ||listOfRest == undefined || listOfRest.length==0)?
         <ShimmerCard/>:
         <div className="body">
             <div className="Search">
@@ -43,15 +45,14 @@ useEffect(()=>{
                 }>Top Restaurant</button>
             </div>
             <div className="res-container">
-            {console.log(filterListOfRest)}
                {
                 filterListOfRest.map(function(restaurant){
-                        return  <RestCar
+                        return <li><Link to={"/restaurant/"+restaurant.id}><RestCar
                         key={restaurant.info.id} 
                         rating={restaurant.info.avgRating} 
                         restName={restaurant.info.name} 
                         cusines={(restaurant.info.cuisines).join(", ")} 
-                        imgId ={restaurant.info.cloudinaryImageId} />
+                        imgId ={restaurant.info.cloudinaryImageId} /></Link></li>
                     })
                 }
             </div>
