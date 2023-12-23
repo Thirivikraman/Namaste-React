@@ -10,17 +10,15 @@ const Body =()=>{
     //const [listOfRest, setListOfRest] = useState(restList);
     const [filterListOfRest, setFilterListOfRest] = useState(listOfRest);
     const [searchValue,setSearchValue] = useState("");
-    const getList = async()=>{
-        let  response =await fetch(SWIGGY_API);
-        let restList = await response.json();
-        return restList;
-    }
+    
 useEffect(()=>{
-        getList().then((rest)=>{
-                setListOfRest(rest.data.cards[2].card.card.gridElements.infoWithStyle.restaurants);
-                setFilterListOfRest(rest.data.cards[2].card.card.gridElements.infoWithStyle.restaurants);
-            });
-        ;},[]);
+    fetchAPi();},[]);
+const fetchAPi = async()=>{
+                let  response =await fetch(SWIGGY_API);
+                let restList = await response.json();
+                setListOfRest(restList.data.cards[2].card.card.gridElements.infoWithStyle.restaurants);
+                setFilterListOfRest(restList.data.cards[2].card.card.gridElements.infoWithStyle.restaurants);
+}
     
     return (
         (listOfRest == null ||listOfRest == undefined || listOfRest.length==0)?
@@ -47,7 +45,7 @@ useEffect(()=>{
             <div className="res-container">
                {
                 filterListOfRest.map(function(restaurant){
-                        return <li><Link to={"/restaurant/"+restaurant.id}><RestCar
+                        return <li><Link to={"/restaurant/"+restaurant.info.id}><RestCar
                         key={restaurant.info.id} 
                         rating={restaurant.info.avgRating} 
                         restName={restaurant.info.name} 
