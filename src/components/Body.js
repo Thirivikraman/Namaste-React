@@ -1,24 +1,18 @@
 import RestCar from "./RestCard"
-import { useEffect, useState } from "react";
-import {SWIGGY_API} from "../utilities/constants"
+import useRestCards from "../utilities/useRestCards"
 import ShimmerCard from "./ShimmerCard"
 import { Link } from "react-router-dom";
-//import {restList} from "../utilities/MockData"
+
 
 const Body =()=>{
-    const [listOfRest, setListOfRest] = useState([]);
-    //const [listOfRest, setListOfRest] = useState(restList);
-    const [filterListOfRest, setFilterListOfRest] = useState(listOfRest);
-    const [searchValue,setSearchValue] = useState("");
     
-useEffect(()=>{
-    fetchAPi();},[]);
-const fetchAPi = async()=>{
-                let  response =await fetch(SWIGGY_API);
-                let restList = await response.json();
-                setListOfRest(restList.data.cards[2].card.card.gridElements.infoWithStyle.restaurants);
-                setFilterListOfRest(restList.data.cards[2].card.card.gridElements.infoWithStyle.restaurants);
-}
+    const {
+        listOfRest,
+        filterListOfRest,
+        searchValue,
+        search,
+        topRest
+    } = useRestCards();
     
     return (
         (listOfRest == null ||listOfRest == undefined || listOfRest.length==0)?
@@ -29,18 +23,10 @@ const fetchAPi = async()=>{
                     console.log(e);
                     setSearchValue(e.target.value);
                 }}></input>
-                <button onClick={()=>{
-                    let filtered = listOfRest.filter((res)=>res.info.name.toLowerCase().includes(searchValue.toLowerCase()));
-                    setFilterListOfRest(filtered);
-                }}>Search</button>
+                <button onClick={search}>Search</button>
             </div>
             <div className="filter">
-                <button onClick={
-                    function(){
-                        let newList = filterListOfRest.filter((res)=>res.info.avgRating>4.2);
-                        setFilterListOfRest(newList);
-                    }
-                }>Top Restaurant</button>
+                <button onClick={topRest}>Top Restaurant</button>
             </div>
             <div className="res-container">
                {
