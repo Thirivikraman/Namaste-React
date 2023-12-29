@@ -1,5 +1,5 @@
 export const FOOD_URL = "https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/";
-
+export const FOOD_URL_Items = "https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_208,h_208,c_fit/"
 export const LOGO_URL = "https://img.freepik.com/premium-vector/kitchen-chef-logo-design-vector-template_15146-1164.jpg?w=740";
 
 export const SWIGGY_API = "https://www.swiggy.com/dapi/restaurants/list/v5?lat=11.6631865&lng=78.1446849&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"

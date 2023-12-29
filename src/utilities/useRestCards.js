@@ -13,21 +13,23 @@ const useRestCards = ()=>{
     const fetchAPi = async()=>{
                     let  response =await fetch(SWIGGY_API);
                     let restList = await response.json();
-                    setListOfRest(restList.data.cards[2].card.card.gridElements.infoWithStyle.restaurants);
-                    setFilterListOfRest(restList.data.cards[2].card.card.gridElements.infoWithStyle.restaurants);
+                    setListOfRest(restList?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
+                    setFilterListOfRest(restList?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
     }
 
     const search =()=>{
         let filtered = listOfRest.filter((res)=>res.info.name.toLowerCase().includes(searchValue.toLowerCase()));
         setFilterListOfRest(filtered);
     }
+    const searchChange = (e)=>{
+        setSearchValue(e.target.value);}
 
     const topRest = function(){
-        let newList = filterListOfRest.filter((res)=>res.info.avgRating>4.2);
+        let newList = listOfRest.filter((res)=>res.info.avgRating>4.2);
         setFilterListOfRest(newList);
     }
 
-    return {listOfRest,filterListOfRest,searchValue,search,topRest};
+    return {listOfRest,filterListOfRest,searchValue,search,topRest,searchChange};
 }
 
 export default useRestCards

@@ -12,4 +12,14 @@ const RestCard = (props) =>{
             </div>
     );
 }
+
+export const withPromtedLabel = (RestCard)=>{
+    return (props)=>{
+        return (<div>
+            <label>Top Rated</label>
+            <RestCard {...props}/>
+        </div>);
+    }
+}
+
 export default RestCard;

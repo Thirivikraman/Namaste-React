@@ -1,8 +1,7 @@
-import RestCar from "./RestCard"
+import RestCard, {withPromtedLabel} from "./RestCard"
 import useRestCards from "../utilities/useRestCards"
 import ShimmerCard from "./ShimmerCard"
-import { Link } from "react-router-dom";
-
+import { Link } from "react-router-dom"; 
 
 const Body =()=>{
     
@@ -11,8 +10,11 @@ const Body =()=>{
         filterListOfRest,
         searchValue,
         search,
-        topRest
+        topRest,
+        searchChange
     } = useRestCards();
+
+    const RestCardWithPromoted = withPromtedLabel(RestCard);
     
     return (
         (listOfRest == null ||listOfRest == undefined || listOfRest.length==0)?
@@ -20,9 +22,7 @@ const Body =()=>{
         <div className=" w-full bg-orange-100">
             <div className="flex ml-12 items-center justify-center">
                 <div className=" my-4">
-                    <input className= "border rounded-md border-solid h-8 w-96"name="Search" value={searchValue} onChange={(e)=>{
-                        setSearchValue(e.target.value);
-                    }}></input>
+                    <input className= "border rounded-md border-solid h-8 w-96"name="Search" value={searchValue} onChange={searchChange}></input>
                     <button className="ml-4 bg-lime-300 hover:bg-lime-400 py-1 px-2 rounded-sm" onClick={search}>Search</button>
                 </div>
                 <div className="ml-4 my-4 w-auto bg-rose-300 hover:bg-rose-400 py-1 px-2 rounded-sm">
@@ -32,12 +32,25 @@ const Body =()=>{
             <div className="flex flex-wrap gap-8 mx-12 my-8">
                {
                 filterListOfRest.map(function(restaurant){
-                        return <li className="list-none"><Link to={"/restaurant/"+restaurant.info.id}><RestCar
-                        key={restaurant.info.id} 
-                        rating={restaurant.info.avgRating} 
-                        restName={restaurant.info.name} 
-                        cusines={(restaurant.info.cuisines).join(", ")} 
-                        imgId ={restaurant.info.cloudinaryImageId} /></Link></li>
+                        return (<li className="list-none">
+                        <Link to={"/restaurant/"+restaurant.info.id}>
+                        {
+                            restaurant.info.avgRating > 4? 
+                            <RestCardWithPromoted
+                            key={restaurant.info.id}
+                            rating={restaurant.info.avgRating} 
+                            restName={restaurant.info.name} 
+                            cusines={(restaurant.info.cuisines).join(", ")} 
+                            imgId ={restaurant.info.cloudinaryImageId} />: 
+                            <RestCard
+                            key={restaurant.info.id}
+                            rating={restaurant.info.avgRating} 
+                            restName={restaurant.info.name} 
+                            cusines={(restaurant.info.cuisines).join(", ")} 
+                            imgId ={restaurant.info.cloudinaryImageId} />
+                        } 
+                        </Link>
+                        </li>)
                     })
                 }
             </div>
