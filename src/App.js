@@ -1,17 +1,23 @@
-import React, { lazy, Suspense } from "react"
+import React, { lazy, Suspense, useContext, useState } from "react"
 import ReactDOM from "react-dom/client"
 import Header from "./components/Header";
 import Body from "./components/Body";
 import About from "./components/About";
 import Contact from "./components/Contact"
 import RestMenu from "./components/RestMenu";
+import UserContext from "./utilities/UserContext.js";
 import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
+
 const App = () => {
+    const UserName = useContext(UserContext);
+    const [nameContext, SetNameContext] = useState({loggedInUser: "Vikram"});
     return (
+        <UserContext.Provider value={{loggedInUser: nameContext.loggedInUser, SetNameContext}} >
         <div className="app">
         <Header/>
-        <Outlet/>
+          <Outlet/>  
         </div>
+        </UserContext.Provider>
     );}; 
 
 const root = ReactDOM.createRoot(document.getElementById("root"));

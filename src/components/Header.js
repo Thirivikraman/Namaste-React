@@ -1,12 +1,13 @@
 import { Link } from "react-router-dom";
 import { LOGO_URL } from "../utilities/constants";
-import { useState } from "react";
-import useOnlineStatus from "../utilities/useOnlineStatus"
-
+import { createContext, useContext, useState } from 'react';
+import useOnlineStatus from "../utilities/useOnlineStatus";
+import UserContext from "../utilities/UserContext";
 const Header = ()=>{
     const [state,setState] = useState("Login");
     const toggleBtn = ()=> {state=="Login"?setState("Logout"):setState("Login")};
     const status = useOnlineStatus();
+    const UserName = useContext(UserContext);
     return (
         <div className="flex justify-between items-center">
             <div className="w-24 ml-10">
@@ -21,6 +22,7 @@ const Header = ()=>{
                     <li className=" border-b-2 border-b-white hover:border-yellow-500"><Link to="/Grocery">Grocery</Link></li>
                     <li className=" border-b-2 border-b-white hover:border-violet-500">Cart</li>
                     <li><button className="bg-teal-300 hover:bg-teal-500 px-3 py-1" onClick={toggleBtn}>{state}</button></li>
+                    <li className=" border-b-2 border-white hover:border-violet-500">{UserName.loggedInUser}</li>
                 </ul>
             </div>
             

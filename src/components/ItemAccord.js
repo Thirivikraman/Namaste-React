@@ -9,22 +9,12 @@ const ItemAccord = (props)=>{
         if(showIndexFlag){
             setShowIndex(null);
         }
-        /*
-        if(flag){
-            setShowIndex(index);
-            setFlag(false);
-        }
-        else{
-            setShowIndex(null);
-            setFlag(true);
-        }*/
     }
 
     return (
     <div>
         <div className="flex justify-between text-4xl">
             <h2 className="cursor-pointer text-2xl" onClick={expandAccord2} >{title}  ({items.length})</h2>
-            {/*<span className="cursor-pointer" onClick={expandAccord}> {isExpanded.Symbol} </span>*/}
         </div>
     { //below code is to show only one item
         showIndexFlag && items.map((item)=>
