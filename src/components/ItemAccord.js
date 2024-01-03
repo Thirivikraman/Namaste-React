@@ -13,7 +13,7 @@ const ItemAccord = (props)=>{
 
     return (
     <div>
-        <div className="flex justify-between text-4xl">
+        <div className="flex justify-between text-4xl w-96">
             <h2 className="cursor-pointer text-2xl" onClick={expandAccord2} >{title}  ({items.length})</h2>
         </div>
     { //below code is to show only one item
@@ -23,7 +23,8 @@ const ItemAccord = (props)=>{
     name = {item.card.info.name}
     price = {item.card.info.price/100} 
     imageurl = {item.card.info.imageId}
-    />)}
+    />
+    )}
     </div>)
 }
 

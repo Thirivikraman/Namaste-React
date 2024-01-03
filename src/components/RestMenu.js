@@ -24,7 +24,6 @@ const RestMenu= ()=>{
             </div>
             <div>
                 {itemCategory.map((item,index)=> {
-                    console.log("Title" + item?.card?.card?.title + " , Itemcards" + item?.card?.card?.itemCards);
                     return(
                         <ItemAccord 
                         key={item?.card?.card?.title} 
