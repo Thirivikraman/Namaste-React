@@ -13,8 +13,8 @@ const useRestCards = ()=>{
     const fetchAPi = async()=>{
                     let  response =await fetch(SWIGGY_API);
                     let restList = await response.json();
-                    setListOfRest(restList?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
-                    setFilterListOfRest(restList?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
+                    setListOfRest(restList?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
+                    setFilterListOfRest(restList?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
     }
 
     const search =()=>{

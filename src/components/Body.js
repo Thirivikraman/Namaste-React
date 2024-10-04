@@ -18,12 +18,6 @@ const Body =()=>{
 
     const RestCardWithPromoted = withPromtedLabel(RestCard);
 
-    const {loggedInUser, SetNameContext} = useContext(UserContext);
-    const [flag, setFlag] = useState(true);
-    const setUser = ()=>{
-        flag? SetNameContext({loggedInUser:"Thirivikraman"}): SetNameContext({loggedInUser:"Vikram"});
-        setFlag(!flag);
-    }
     return (
         (listOfRest == null ||listOfRest == undefined || listOfRest.length==0)?
         <ShimmerCard/>:
@@ -36,10 +30,6 @@ const Body =()=>{
                 <div className="ml-4 my-4 w-auto bg-rose-300 hover:bg-rose-400 py-1 px-2 rounded-sm">
                     <button onClick={topRest}>Top Restaurant</button>
                 </div>
-                <div className="ml-4 my-4 w-auto bg-blue-300 hover:bg-blue-400 py-1 px-2 rounded-sm">
-                    <button onClick={setUser}>Click to change User</button>
-                </div>
-                <h2 className="ml-4 my-4 text-2xl">{loggedInUser}</h2>
                 
             </div>
             <div className="flex flex-wrap gap-8 mx-12 my-8">
